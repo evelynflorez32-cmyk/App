@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pixel Lab: un pequeño espacio creativo hecho por un estudiante de grado 11.">
+  <title>Pixel Lab | Mi mundo digital</title>
+  <style>
+    :root {
+      --fondo: #10131f;
+      --panel: #191e2e;
+      --texto: #f4f5ff;
+      --suave: #b6bdd3;
+      --lila: #a78bfa;
+      --menta: #5eead4;
+      --rosa: #fb7185;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      color: var(--texto);
+      background:
+        radial-gradient(circle at 85% 8%, #35265a 0, transparent 27rem),
+        radial-gradient(circle at 5% 40%, #163d45 0, transparent 25rem),
+        var(--fondo);
+      line-height: 1.6;
+    }
+    a { color: inherit; }
+    .contenedor { width: min(1080px, 90%); margin: auto; }
+    header {
+      position: sticky; top: 0; z-index: 5;
+      background: rgba(16, 19, 31, .86);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,.09);
+    }
+    nav {
+      min-height: 72px; display: flex; align-items: center;
+      justify-content: space-between; gap: 18px;
+    }
+    .marca { font-weight: 900; letter-spacing: .5px; font-size: 1.15rem; }
+    .marca span { color: var(--menta); }
+    .enlaces { display: flex; gap: 22px; flex-wrap: wrap; }
+    .enlaces a { text-decoration: none; color: var(--suave); font-size: .95rem; }
+    .enlaces a:hover { color: var(--menta); }
+    .hero {
+      min-height: 76vh; display: grid; grid-template-columns: 1.15fr .85fr;
+      align-items: center; gap: 42px; padding-top: 58px; padding-bottom: 70px;
+    }
+    .etiqueta {
+      display: inline-block; border: 1px solid rgba(94,234,212,.35);
+      color: var(--menta); border-radius: 999px; padding: 6px 12px;
+      font-size: .82rem; letter-spacing: .7px; text-transform: uppercase;
+    }
+    h1 { font-size: clamp(2.7rem, 7vw, 5.3rem); line-height: 1.02; margin: 20px 0; letter-spacing: -2px; }
+    h1 span {
+      background: linear-gradient(90deg, var(--menta), var(--lila), var(--rosa));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .intro { color: var(--suave); font-size: 1.1rem; max-width: 590px; }
+    .botones { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 27px; }
+    .boton {
+      display: inline-block; text-decoration: none; padding: 11px 17px;
+      border-radius: 12px; font-weight: 800; border: 1px solid transparent;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .boton:hover { transform: translateY(-3px); }
+    .principal { background: var(--menta); color: #102023; box-shadow: 0 8px 28px #5eead425; }
+    .secundario { border-color: #ffffff2c; color: var(--texto); }
+    .arte {
+      position: relative; min-height: 340px; display: grid; place-items: center;
+      border: 1px solid #ffffff1c; border-radius: 30px; overflow: hidden;
+      background: linear-gradient(145deg, #222941, #171b2b);
+      box-shadow: 0 24px 70px #0003;
+    }
+    .arte::before, .arte::after {
+      content: ""; position: absolute; border-radius: 50%; filter: blur(1px);
+      animation: flotar 5s ease-in-out infinite;
+    }
+    .arte::before { width: 170px; height: 170px; background: #a78bfa55; top: 25px; right: 20px; }
+    .arte::after { width: 130px; height: 130px; background: #5eead455; bottom: 18px; left: 22px; animation-delay: -2s; }
+    .pixel {
+      position: relative; z-index: 1; width: 205px; height: 205px;
+      display: grid; place-items: center; border-radius: 32px;
+      transform: rotate(-7deg); background: linear-gradient(135deg, var(--menta), var(--lila));
+      color: #171b2b; font-size: 5rem; font-weight: 900;
+      box-shadow: 12px 14px 0 #0c101c88;
+    }
+    .nota {
+      position: absolute; z-index: 2; bottom: 24px; right: 20px;
+      background: #10131fe8; border: 1px solid #ffffff20;
+      border-radius: 12px; padding: 10px 14px; color: var(--suave); font-size: .85rem;
+    }
+    section { padding: 65px 0; }
+    .titulo-seccion { font-size: clamp(1.8rem, 4vw, 2.5rem); margin: 0 0 10px; }
+    .subtitulo { color: var(--suave); margin: 0 0 28px; }
+    .rejilla { display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px; }
+    .tarjeta {
+      background: #191e2ed9; border: 1px solid #ffffff13; border-radius: 20px;
+      padding: 23px; transition: transform .2s, border-color .2s;
+    }
+    .tarjeta:hover { transform: translateY(-5px); border-color: #5eea9470; }
+    .icono { font-size: 1.8rem; }
+    .tarjeta h3 { margin: 9px 0 6px; }
+    .tarjeta p { color: var(--suave); margin: 0; }
+    .sobre {
+      display: grid; grid-template-columns: .7fr 1.3fr; gap: 28px; align-items: stretch;
+    }
+    .numero {
+      display: grid; place-items: center; min-height: 210px; border-radius: 22px;
+      background: linear-gradient(135deg, #5eead426, #a78bfa30);
+      border: 1px solid #ffffff16; font-size: 4rem; font-weight: 900; color: var(--menta);
+    }
+    .texto-sobre {
+      border: 1px solid #ffffff16; border-radius: 22px; padding: 25px;
+      background: #191e2eaa;
+    }
+    .texto-sobre p { color: var(--suave); }
+    .habilidades { display: flex; flex-wrap: wrap; gap: 9px; }
+    .habilidades span { background: #ffffff0c; border: 1px solid #ffffff1c; border-radius: 999px; padding: 6px 11px; font-size: .85rem; }
+    .reto {
+      border-radius: 24px; padding: 28px;
+      background: linear-gradient(110deg, #5eead418, #a78bfa18);
+      border: 1px solid #ffffff1b;
+    }
+    .reto p { color: var(--suave); }
+    .reto button {
+      cursor: pointer; background: var(--lila); color: #171323; border: 0;
+      border-radius: 10px; padding: 11px 15px; font: inherit; font-weight: 800;
+    }
+    #mensaje { margin-top: 15px; font-weight: 700; color: var(--menta); min-height: 1.6em; }
+    footer { border-top: 1px solid #ffffff13; padding: 25px 0; color: var(--suave); font-size: .9rem; }
+    footer .contenedor { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    @keyframes flotar { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+    @media (max-width: 760px) {
+      .hero, .sobre { grid-template-columns: 1fr; }
+      .hero { min-height: auto; gap: 28px; padding-top: 45px; }
+      .arte { min-height: 285px; }
+      .pixel { width: 165px; height: 165px; font-size: 4rem; }
+      .rejilla { grid-template-columns: 1fr; }
+      nav { align-items: flex-start; padding: 15px 0; flex-direction: column; }
+      .enlaces { gap: 14px; }
+      h1 { letter-spacing: -1px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="contenedor" aria-label="Navegación principal">
+      <a class="marca" href="#inicio" style="text-decoration:none">PIXEL<span>LAB</span> ✦</a>
+      <div class="enlaces">
+        <a href="#ideas">Ideas</a>
+        <a href="#sobre-mi">El proyecto</a>
+        <a href="#reto">Mini reto</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero contenedor" id="inicio">
+      <div>
+        <span class="etiqueta">✦ Proyecto de informática · Grado 11</span>
+        <h1>Ideas pequeñas.<br><span>Impacto digital.</span></h1>
+        <p class="intro">¡Hola! Este es mi rincón creativo en internet. Un proyecto para experimentar con el diseño web, aprender haciendo y convertir líneas de código en algo que se pueda explorar.</p>
+        <div class="botones">
+          <a class="boton principal" href="#ideas">Explorar la página ↘</a>
+          <a class="boton secundario" href="#sobre-mi">Conocer el proyecto</a>
+        </div>
+      </div>
+      <div class="arte" aria-label="Ilustración decorativa de Pixel Lab">
+        <div class="pixel">P<span style="font-size:.5em">✦</span></div>
+        <div class="nota">creado con curiosidad_</div>
+      </div>
+    </section>
+
+    <section class="contenedor" id="ideas">
+      <h2 class="titulo-seccion">Mi laboratorio de ideas</h2>
+      <p class="subtitulo">Tres cosas que hacen especial este pequeño universo digital.</p>
+      <div class="rejilla">
+        <article class="tarjeta">
+          <div class="icono" aria-hidden="true">🎨</div>
+          <h3>Diseño con personalidad</h3>
+          <p>Colores, formas y espacios que se combinan para crear una experiencia visual propia.</p>
+        </article>
+        <article class="tarjeta">
+          <div class="icono" aria-hidden="true">💻</div>
+          <h3>Código que construye</h3>
+          <p>HTML organiza el contenido y CSS le da estilo. Cada detalle tiene una razón de ser.</p>
+        </article>
+        <article class="tarjeta">
+          <div class="icono" aria-hidden="true">🚀</div>
+          <h3>Aprender probando</h3>
+          <p>Equivocarse, corregir y volver a intentar también hacen parte de crear tecnología.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="contenedor" id="sobre-mi">
+      <h2 class="titulo-seccion">Detrás de los píxeles</h2>
+      <p class="subtitulo">Una idea sencilla que se convierte en una página real.</p>
+      <div class="sobre">
+        <div class="numero" aria-label="Grado once">11<span style="font-size:.35em">°</span></div>
+        <div class="texto-sobre">
+          <h3>Un proyecto hecho para aprender</h3>
+          <p>Pixel Lab representa mi proceso como estudiante: explorar herramientas digitales, cuidar los detalles y descubrir cómo una idea puede tomar forma en la web. La página está construida con tecnologías básicas para que sea fácil de entender, editar y mejorar.</p>
+          <div class="habilidades">
+            <span>HTML5</span><span>CSS3</span><span>Diseño adaptable</span><span>GitHub Pages</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contenedor" id="reto">
+      <div class="reto">
+        <span class="etiqueta">Pausa interactiva</span>
+        <h2 class="titulo-seccion" style="margin-top:14px">Un mini reto para ti</h2>
+        <p>Una página también puede responder a quien la visita. Pulsa el botón y descubre un mensaje aleatorio.</p>
+        <button type="button" id="boton-reto">Revelar mensaje ✨</button>
+        <p id="mensaje" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="contenedor">
+      <span>✦ Pixel Lab — Proyecto escolar de informática</span>
+      <span>Hecho con curiosidad y código.</span>
+    </div>
+  </footer>
+
+  <script>
+    const mensajes = [
+      "Tu próxima idea puede empezar con una sola línea de código. 💡",
+      "No tiene que ser perfecto a la primera: tiene que empezar. 🚀",
+      "La creatividad también se entrena, igual que programar. 🎨",
+      "¡Reto desbloqueado! Sigue explorando y aprendiendo. ✨"
+    ];
+
+    const boton = document.getElementById("boton-reto");
+    const mensaje = document.getElementById("mensaje");
+
+    boton.addEventListener("click", function () {
+      const indice = Math.floor(Math.random() * mensajes.length);
+      mensaje.textContent = mensajes[indice];
+    });
+  </script>
+</body>
+</html>
